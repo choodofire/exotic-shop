@@ -1,1 +1,24 @@
-<h1>Добавить</h1>
+<h1>Добавить животное</h1>
+
+
+<form action="/add" method="post">
+    <div class="input-field">
+        <input id="title" name="title" type="text" class="validate" required>
+        <label for="title">Название животного</label>
+        <span class="helper-text" data-error="Введите название"></span>
+    </div>
+    <div class="input-field">
+        <input id="price" name="price" type="number" class="validate" required min="1">
+        <label for="price">Цена животного</label>
+        <span class="helper-text" data-error="Введите цену"></span>
+    </div>
+    <div class="input-field">
+        <input id="image" name="img" type="text" class="validate" required>
+        <label for="img">URL фото</label>
+        <span class="helper-text" data-error="Введите URL-картинку"></span>
+    </div>
+    <button class="btn btn-primary">Добавить животное</button>
+
+</form>
+
+

@@ -23,6 +23,7 @@ app.set('view engine', 'hbs')
 app.set('views', 'views')
 
 app.use(express.static('public'))
+app.use(express.urlencoded({extended: true}))
 app.use('/',homeRoutes)
 app.use('/add',addRoutes)
 app.use('/animals',animalsRoutes)

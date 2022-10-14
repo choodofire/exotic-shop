@@ -5,3 +5,24 @@
 .brand-logo {
     cursor: default;
 }
+
+.animal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.animal h1 {
+    margin-bottom: 2rem;
+}
+
+.animal img {
+    max-width: 600px;
+    height: auto;
+}
+
+.animal .price.big {
+    font-size: 2.5rem;
+}
+
