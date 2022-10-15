@@ -21,6 +21,12 @@
                 <li><a href="/add">Добавить животное</a></li>
             {{/if}}
 
+            {{#if isCart}}
+                <li class="active"><a href="/cart">Корзина</a></li>
+            {{else}}
+                <li><a href="/cart">Корзина</a></li>
+            {{/if}}
+
 
         </ul>
     </div>

@@ -43,6 +43,25 @@ class Animal {
         })
     }
 
+    static async update(animal) {
+        const animals = await Animal.getAll()
+        const idx = animals.findIndex(c => c.id === animal.id)
+        animals[idx] = animal
+        return new Promise((resolve, reject) => {
+            fs.writeFile(
+                path.join(__dirname, '..', 'data', 'animals.json'),
+                JSON.stringify(animals),
+                (err) => {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        resolve()
+                    }
+                }
+            )
+        })
+    }
+
     static getAll() {
         return new Promise((resolve, reject) => {
             fs.readFile(

@@ -1,4 +1,4 @@
-<h1>animals</h1>
+<h1>Animals</h1>
 
 {{#if animals.length}}
     {{#each animals}}
@@ -12,8 +12,13 @@
                     <span class="card-title">{{title}}</span>
                     <p class="price">{{price}}</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action actions">
                     <a href="/animals/{{id}}">Открыть страницу</a>
+                    <a href="/animals/{{id}}/edit?allow=true">Редактировать</a>
+                    <form action="/cart/add" method="POST">
+                        <input type="hidden" name="id" value="{{id}}">
+                        <button type="submit" class="btn btn-primary">Купить</button>
+                    </form>
                 </div>
             </div>
         </div>
