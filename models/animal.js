@@ -1,15 +1,28 @@
 import {Schema, model} from 'mongoose'
 
-const animal = new Schema({
+const animalSchema = new Schema({
     title: {
         type: String,
-        required: true
+        required: true,
     },
     price: {
         type: Number,
-        required: true
+        required: true,
     },
     img: String,
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }
 })
 
-export default model('Animal', animal)
+animalSchema.method('toClient', function () {
+    const animal = this.toObject()
+
+    animal.id = animal._id
+    delete animal._id
+
+    return animal
+})
+
+export default model('Animal', animalSchema)

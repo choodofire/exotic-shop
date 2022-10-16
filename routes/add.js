@@ -11,11 +11,11 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    // const animal = new Animal(req.body.title, req.body.price, req.body.img)
     const animal = new Animal({
         title: req.body.title,
         price: req.body.price,
         img: req.body.img,
+        userId: req.user._id,
     })
 
     try {

@@ -4,7 +4,9 @@ import Animal from '../models/animal.js'
 const router = Router()
 
 router.get('/', async (req, res) => {
-    const animals = await Animal.find().lean()
+    const animals = await Animal.find()
+        .lean()
+        .populate('userId', 'email name')
     res.status(200).render('animals', {
         title: 'Животные',
         isAnimals: true,
