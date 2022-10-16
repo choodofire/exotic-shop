@@ -6,12 +6,14 @@ import homeRoutes from './routes/home.js'
 import addRoutes from './routes/add.js'
 import animalsRoutes from './routes/animals.js'
 import cartRoutes from './routes/cart.js'
+import mongoose from "mongoose";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3000;
 const log = console.log;
+const url = "mongodb+srv://vyacheslav:pgSLiNU2xaCeHIJ7@cluster0.qtqihfc.mongodb.net/shop"
 
 const app = express();
 const hbs = expressHBS.create({
@@ -30,6 +32,19 @@ app.use('/add', addRoutes)
 app.use('/animals', animalsRoutes)
 app.use('/cart', cartRoutes)
 
-app.listen(PORT, () => {
-    log(`Server is running on PORT: ${PORT}`)
-})
+
+async function start() {
+    try {
+        await mongoose.connect(url, {
+            useNewUrlParser: true,
+            // useFindAndModify: false,
+        })
+        await app.listen(PORT, () => {
+            log(`Server is running on PORT: ${PORT}`)
+        })
+    } catch (e) {
+        console.log(e)
+    }
+}
+start()
+

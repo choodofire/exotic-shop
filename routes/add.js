@@ -11,9 +11,19 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const animal = new Animal(req.body.title, req.body.price, req.body.img)
-    await animal.save()
-    res.redirect('/animals')
+    // const animal = new Animal(req.body.title, req.body.price, req.body.img)
+    const animal = new Animal({
+        title: req.body.title,
+        price: req.body.price,
+        img: req.body.img,
+    })
+
+    try {
+        await animal.save()
+        res.redirect('/animals')
+    } catch (e) {
+        console.log(e)
+    }
 
 })
 
