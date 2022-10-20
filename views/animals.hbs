@@ -14,11 +14,15 @@
                 </div>
                 <div class="card-action actions">
                     <a href="/animals/{{_id}}">Открыть страницу</a>
-                    <a href="/animals/{{_id}}/edit?allow=true">Редактировать</a>
-                    <form action="/cart/add" method="POST">
-                        <input type="hidden" name="id" value="{{_id}}">
-                        <button type="submit" class="btn btn-primary">Купить</button>
-                    </form>
+                    {{#if @root.isAuth}}
+                        <a href="/animals/{{_id}}/edit?allow=true">Редактировать</a>
+                        <form action="/cart/add" method="POST">
+                            <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+                            <input type="hidden" name="id" value="{{_id}}">
+                            <button type="submit" class="btn btn-primary">Купить</button>
+                        </form>
+                    {{/if}}
+
                 </div>
             </div>
         </div>

@@ -17,11 +17,17 @@
         <label for="img">URL фото</label>
         <span class="helper-text" data-error="Введите URL-картинку"></span>
     </div>
+
+    <input type="hidden" name="_csrf" value="{{csrf}}">
     <input type="hidden" name="id" value="{{animal._id}}">
+
     <button type="submit" class="btn btn-primary">Редактировать животное</button>
 </form>
 
 <form action="/animals/remove" method="post">
+
     <input type="hidden" name="id" value="{{animal._id}}">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+
     <button class="btn red">Удалить животное</button>
 </form>

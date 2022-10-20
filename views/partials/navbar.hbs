@@ -1,6 +1,6 @@
 <nav>
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Planet Exotic</a>
+        <a href="/" class="brand-logo">Planet Exotic</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 
             {{#if isHome}}
@@ -15,23 +15,32 @@
                 <li><a href="/animals">Животные</a></li>
             {{/if}}
 
-            {{#if isAdd}}
-                <li class="active"><a href="/add">Добавить животное</a></li>
+            {{#if isAuth}}
+                {{#if isAdd}}
+                    <li class="active"><a href="/add">Добавить животное</a></li>
+                {{else}}
+                    <li><a href="/add">Добавить животное</a></li>
+                {{/if}}
+
+                {{#if isCart}}
+                    <li class="active"><a href="/cart">Корзина</a></li>
+                {{else}}
+                    <li><a href="/cart">Корзина</a></li>
+                {{/if}}
+                {{#if isOrders}}
+                    <li class="active"><a href="/orders">Заказы</a></li>
+                {{else}}
+                    <li><a href="/orders">Заказы</a></li>
+                {{/if}}
+                <li><a href="/auth/logout">Выйти</a></li>
             {{else}}
-                <li><a href="/add">Добавить животное</a></li>
+                {{#if isLogin}}
+                    <li class="active"><a href="/auth/login#login">Войти</a></li>
+                {{else}}
+                    <li><a href="/auth/login#login">Войти</a></li>
+                {{/if}}
             {{/if}}
 
-            {{#if isCart}}
-                <li class="active"><a href="/cart">Корзина</a></li>
-            {{else}}
-                <li><a href="/cart">Корзина</a></li>
-            {{/if}}
-
-            {{#if isOrders}}
-                <li class="active"><a href="/orders">Заказы</a></li>
-            {{else}}
-                <li><a href="/orders">Заказы</a></li>
-            {{/if}}
 
         </ul>
     </div>

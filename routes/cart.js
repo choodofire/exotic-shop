@@ -1,5 +1,6 @@
 import {Router} from 'express'
 import Animal from "../models/animal.js";
+import authMiddleware from '../middleware/auth.js'
 
 const router = Router()
 
@@ -17,15 +18,14 @@ function computePrice(animals) {
     }, 0)
 }
 
-router.post('/add', async (req, res) => {
+router.post('/add', authMiddleware, async (req, res) => {
     const animal = await Animal.findById(req.body.id)
     await req.user.addToCart(animal)
     res.redirect('/cart')
 })
 
-router.get('/', async (req, res) => {
-    const user = await req.user
-        .populate('cart.items.animalId')
+router.get('/', authMiddleware, async (req, res) => {
+    const user = await req.user.populate('cart.items.animalId')
 
     const animals = mapCartItems(user.cart)
 
@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
     })
 })
 
-router.delete('/remove/:id', async (req, res) => {
+router.delete('/remove/:id', authMiddleware, async (req, res) => {
     await req.user.removeFromCart(req.params.id)
     const user = await req.user.populate('cart.items.animalId')
 

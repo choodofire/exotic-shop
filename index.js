@@ -1,14 +1,20 @@
 import express from "express";
 import path from 'path';
+import csrf from 'csurf';
+import flash from 'connect-flash'
 import {fileURLToPath} from 'url';
-import expressHBS from 'express-handlebars'
+import expressHBS from 'express-handlebars';
+import session from 'express-session';
+import mongoStore from 'connect-mongodb-session';
 import mongoose from "mongoose";
-import homeRoutes from './routes/home.js'
-import addRoutes from './routes/add.js'
-import animalsRoutes from './routes/animals.js'
-import cartRoutes from './routes/cart.js'
-import ordersRoutes from './routes/orders.js'
-import User from './models/user.js'
+import homeRoutes from './routes/home.js';
+import addRoutes from './routes/add.js';
+import animalsRoutes from './routes/animals.js';
+import cartRoutes from './routes/cart.js';
+import ordersRoutes from './routes/orders.js';
+import authRoutes from './routes/auth.js';
+import varMiddleware from './middleware/variables.js';
+import userMiddleware from './middleware/user.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -16,7 +22,9 @@ const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3000;
 const log = console.log;
-const url = "mongodb+srv://vyacheslav:pgSLiNU2xaCeHIJ7@cluster0.qtqihfc.mongodb.net/shop"
+const MONGODB_URI = "mongodb+srv://vyacheslav:pgSLiNU2xaCeHIJ7@cluster0.qtqihfc.mongodb.net/shop"
+
+const MongoStore = mongoStore(session)
 
 const app = express();
 const hbs = expressHBS.create({
@@ -24,44 +32,42 @@ const hbs = expressHBS.create({
     extname: 'hbs',
 })
 
+const store = new MongoStore({
+    collection: 'sessions',
+    uri: MONGODB_URI
+})
+
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
 
-app.use( async (req, res, next) => {
-    try {
-        const user = await User.findById('634beec36c5989fcb277669c')
-        req.user = user
-        next()
-    }   catch (e) {
-        console.log(e)
-    }
-})
-
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended: true}))
+app.use(session({
+    secret: 'some secret value',
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+}))
+app.use(csrf())
+app.use(varMiddleware)
+app.use(userMiddleware)
+app.use(flash())
+
 app.use('/', homeRoutes)
 app.use('/add', addRoutes)
 app.use('/animals', animalsRoutes)
 app.use('/cart', cartRoutes)
 app.use('/orders', ordersRoutes)
+app.use('/auth', authRoutes)
 
 
 async function start() {
     try {
-        await mongoose.connect(url, {
+        await mongoose.connect(MONGODB_URI, {
             useNewUrlParser: true,
             // useFindAndModify: false,
         })
-        const candidate =  await User.findOne()
-        if (!candidate) {
-            const user = new User({
-                email: 'ResSlavkaRes@mail.ru',
-                name: 'Vyacheslav',
-                cart: {items: []}
-            })
-            await user.save()
-        }
         await app.listen(PORT, () => {
             log(`Server is running on PORT: ${PORT}`)
         })
