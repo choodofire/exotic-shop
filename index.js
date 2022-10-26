@@ -15,14 +15,13 @@ import ordersRoutes from './routes/orders.js';
 import authRoutes from './routes/auth.js';
 import varMiddleware from './middleware/variables.js';
 import userMiddleware from './middleware/user.js';
-
+import keys from './keys/index.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3000;
 const log = console.log;
-const MONGODB_URI = "mongodb+srv://vyacheslav:pgSLiNU2xaCeHIJ7@cluster0.qtqihfc.mongodb.net/shop"
 
 const MongoStore = mongoStore(session)
 
@@ -34,7 +33,7 @@ const hbs = expressHBS.create({
 
 const store = new MongoStore({
     collection: 'sessions',
-    uri: MONGODB_URI
+    uri: keys.MONGODB_URI
 })
 
 app.engine('hbs', hbs.engine)
@@ -44,7 +43,7 @@ app.set('views', 'views')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended: true}))
 app.use(session({
-    secret: 'some secret value',
+    secret: keys.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,
@@ -61,10 +60,9 @@ app.use('/cart', cartRoutes)
 app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
 
-
 async function start() {
     try {
-        await mongoose.connect(MONGODB_URI, {
+        await mongoose.connect(keys.MONGODB_URI, {
             useNewUrlParser: true,
             // useFindAndModify: false,
         })
