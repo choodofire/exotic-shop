@@ -16,6 +16,7 @@ import authRoutes from './routes/auth.js';
 import varMiddleware from './middleware/variables.js';
 import userMiddleware from './middleware/user.js';
 import keys from './keys/index.js'
+import hbsHelper from './utils/hbs-helper.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,6 +30,7 @@ const app = express();
 const hbs = expressHBS.create({
     defaultLayout: 'main',
     extname: 'hbs',
+    helpers: hbsHelper,
 })
 
 const store = new MongoStore({
