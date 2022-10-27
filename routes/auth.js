@@ -1,14 +1,18 @@
 import {Router} from 'express'
 import User from '../models/user.js'
 import bcrypt from 'bcryptjs'
-import nodemailer from 'nodemailer'
 import keys from "../keys/index.js";
 import UniSender from 'unisender'
 import crypto from "crypto";
 import regEmail from '../emails/registration.js';
 import resetEmail from '../emails/reset.js'
+import checkAPIs from "express-validator"
+import registerValidators from "../utils/validators.js";
+
 
 const router = Router()
+
+const { validationResult} = checkAPIs
 
 const uniSender = new UniSender({
     api_key: keys.MAIL_API_KEY,
@@ -57,14 +61,24 @@ router.post('/login', async (req, res) => {
             res.redirect('/auth/login#login')
         }
     } catch (e) {
-        console.log(e)
+        console.log('Message - ',e.message)
+        console.log('Name - ',e.name)
+        console.log('Stack - ',e.stack)
     }
 })
 
-router.post('/register', async (req, res) => {
+router.post('/register', registerValidators, async (req, res) => {
     try {
-        const {email, password, repeat, name} = req.body
+        const {email, password, confirm, name} = req.body
         const candidate = await User.findOne({email})
+
+        const errors = validationResult(req)
+
+        if (!errors.isEmpty()) {
+            req.flash('registerError', errors.array()[0].msg)
+            return res.status(422).redirect('/auth/login#register')
+        }
+
         if (candidate) {
             req.flash('registerError', 'Пользователь с таким email уже зарегистрирован')
             res.redirect('/auth/login#register')

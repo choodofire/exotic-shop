@@ -22,7 +22,6 @@ router.get('/', async (req, res) => {
     } catch (e) {
         console.log(e)
     }
-
 })
 
 router.get('/:id', async (req, res) => {
@@ -72,7 +71,6 @@ router.post('/edit', authMiddleware, async (req, res) => {
     } catch (e) {
         console.log(e)
     }
-
 })
 
 router.post('/remove', authMiddleware, async (req, res) => {
