@@ -12,7 +12,14 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    avatarUrl: String,
+    isAdmin: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    avatarUrl: {
+        type: String,
+    },
     resetToken: String,
     resetTokenExp: Date,
     cart: {

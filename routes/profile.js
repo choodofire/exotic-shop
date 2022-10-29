@@ -1,14 +1,27 @@
 import {Router} from 'express'
 import auth from '../middleware/auth.js'
 import User from "../models/user.js";
+import Order from "../models/order.js";
 
 const router = Router()
 
 router.get('/', auth, async (req, res) => {
+    const orders = await Order.find({'user.userId': req.user._id})
+        .lean()
+        .populate('user.userId')
+
     res.render('profile', {
         title: 'Профиль',
         isProfile: true,
-        user: req.user.toObject()
+        user: req.user.toObject(),
+        orders: orders.map(o => {
+            return {
+                ...o,
+                price: o.animals.reduce((total, c) => {
+                    return total += c.count * c.animal.price
+                }, 0)
+            }
+        })
     })
 })
 

@@ -24,7 +24,6 @@ document.querySelectorAll('.price').forEach(node => {
     node.textContent = toCurrency(node.textContent)
 })
 
-
 const $cart = document.querySelector('#cart')
 if ($cart) {
     $cart.addEventListener('click', event => {

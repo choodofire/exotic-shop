@@ -10,10 +10,14 @@ const {validationResult} = checkAPIs
 const animalValidators = validators.animalValidators
 
 router.get('/', authMiddleware, (req, res) => {
-    res.status(200).render('add', {
-        title: 'Добавить животное',
-        isAdd: true,
-    })
+    if (req.user.isAdmin) {
+        res.status(200).render('add', {
+            title: 'Добавить животное',
+            isAdd: true,
+        })
+    } else {
+        res.redirect('/')
+    }
 })
 
 router.post('/', authMiddleware, animalValidators, async (req, res) => {

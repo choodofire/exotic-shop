@@ -9,7 +9,6 @@ import resetEmail from '../emails/reset.js'
 import checkAPIs from "express-validator"
 import validators from "../utils/validators.js";
 
-
 const router = Router()
 
 const {validationResult} = checkAPIs

@@ -51,12 +51,12 @@ router.get('/:id/edit', authMiddleware, async (req, res) => {
     try {
         const animal = await Animal.findById(req.params.id).lean()
 
-        if (!isOwner(animal, req)) {
+        if (!isOwner(animal, req) && !req.user.isAdmin) {
             return res.redirect('/animals')
         }
         res.status(200).render('animal-edit', {
             title: `Редактировать ${animal.title}`,
-            animal
+            animal,
         })
     } catch (e) {
         console.log(e);

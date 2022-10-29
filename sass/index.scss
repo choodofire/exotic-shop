@@ -1,0 +1,87 @@
+$black: #131313;
+$white: #fff;
+
+body{
+  //background-image: url('https://s1.gifyu.com/images/bo-bg-1.gif');
+  height: 100vh;
+  padding:0;
+  margin:0;
+}
+
+.nav-wrapper {
+  padding: 0 2rem;
+}
+
+.brand-logo {
+  cursor: default;
+}
+
+.animal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    margin-bottom: 2rem;
+  }
+  img {
+    max-width: 600px;
+    height: auto;
+  }
+  .price.big {
+    font-size: 4rem;
+  }
+}
+
+.card.animal {
+  height: 650px;
+  width: 410px;
+  position: relative;
+  img {
+    max-height: 400px;
+    width: auto;
+  }
+  .animal-description {
+    margin-right: auto;
+    margin-bottom: auto;
+  }
+  .animal-footer {
+    position: absolute;
+    bottom: 0px;
+  }
+}
+
+.card-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.course-form {
+  margin-bottom: 2rem;
+}
+
+.auth {
+  padding-top: 1rem
+}
+
+.alert {
+  padding: .5rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: rgba(255, 0, 0, .3);
+  color: red;
+}
+
+.avatarBorder {
+  width: 300px;
+  height: 300px;
+  border: 2px solid $black;
+  border-radius: 50%;
+  overflow: hidden;
+  img {
+    max-width: 300px;
+    height: auto;
+  }
+}

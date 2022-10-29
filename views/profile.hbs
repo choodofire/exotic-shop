@@ -1,21 +1,30 @@
-<h1>Профиль</h1>
 
 <div class="row">
-
     <div class="col s6">
+        <h1>Профиль</h1>
         {{#if user.avatarUrl}}
-            <img src="/{{user.avatarUrl}}" alt="avatar-{{user.name}}" class="avatar">
+            <div class="avatarBorder">
+                <img src="/{{user.avatarUrl}}" alt="avatar-{{user.name}}">
+            </div>
         {{else}}
-            <p>Аватара нет</p>
+            <div>
+                <div class="avatarPhoto">
+                    <img src="../images/icons/default-avatar.png" alt="No Avatar" class="avatar">
+                </div>
+                <p>Аватар не установлен</p>
+            </div>
         {{/if}}
-    </div>
 
-    <div class="col s6">
+        <div class="input-field">
+            <input id="email" name="email" type="text" class="validate" required value="{{user.email}}" disabled>
+            <label for="email"><h6>Email</h6></label>
+            <span class="helper-text" data-error="Имя не может быть пустым"></span>
+        </div>
+
         <form action="/profile" method="post" enctype="multipart/form-data">
-            <p>Ваш email: <strong>{{user.email}}</strong> </p>
             <div class="input-field">
                 <input id="name" name="name" type="text" class="validate" required value="{{user.name}}">
-                <label for="name">Ваше имя</label>
+                <label for="name"><h6>Имя</h6></label>
                 <span class="helper-text" data-error="Имя не может быть пустым"></span>
             </div>
 
@@ -33,5 +42,39 @@
             <input type="hidden" name="_csrf" value="{{csrf}}">
             <button type="submit" class="btn">Изменить</button>
         </form>
+    </div>
+
+
+
+    <div class="col s6">
+        <h1>Заказы:</h1>
+        {{#if orders.length}}
+            {{#each orders}}
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">Заказ:
+                                    <small>{{_id}}</small>
+                                </span>
+                                <p class="date">{{date}}</p>
+                                <p><em>{{user.name}} </em>({{user.userId.email}})</p>
+                                <ol>
+                                    {{#each animals}}
+                                        <li>
+                                            {{animal.title}} (x <strong>{{count}}</strong>)
+                                        </li>
+                                    {{/each}}
+                                </ol>
+                                <hr>
+                                <p>Цена: <span class="price">{{price}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        {{else}}
+            <p>Заказов еще нет</p>
+        {{/if}}
     </div>
 </div>

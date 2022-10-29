@@ -22,12 +22,12 @@ import compression from "compression"
 import keys from './keys/index.js'
 import hbsHelper from './utils/hbs-helper.js'
 import errorHandler from './middleware/error404.js'
+import sassMiddleware from "node-sass-middleware"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3000;
-const log = console.log;
 
 const MongoStore = mongoStore(session)
 
@@ -47,8 +47,16 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
 
+app.use(
+    sassMiddleware({
+        src: path.join(__dirname, "sass"),
+        dest: path.join(__dirname, "public"),
+        outputStyle: 'compressed',
+    })
+)
 app.use(express.static(path.join(__dirname, 'public')))
-app.use('/avatars', express.static(path.join(__dirname, 'avatars')))
+app.use('/images/avatars', express.static(path.join(__dirname, 'images/avatars')))
+app.use('/images/icons',express.static(path.join(__dirname, 'images', 'icons')))
 app.use(express.urlencoded({extended: true}))
 app.use(session({
     secret: keys.SESSION_SECRET,
@@ -60,6 +68,7 @@ app.use(fileMiddleware.single("avatar"))
 app.use(csrf())
 app.use(varMiddleware)
 app.use(userMiddleware)
+
 app.use(flash())
 // app.use(helmet())
 app.use(compression())
@@ -72,7 +81,6 @@ app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
 app.use('/profile', profileRoutes)
 
-
 app.use(errorHandler)
 
 async function start() {
@@ -82,7 +90,7 @@ async function start() {
             // useFindAndModify: false,
         })
         await app.listen(PORT, () => {
-            log(`Server is running on PORT: ${PORT}`)
+            console.log(`Server is running on PORT: ${PORT}`)
         })
     } catch (e) {
         console.log(e)
