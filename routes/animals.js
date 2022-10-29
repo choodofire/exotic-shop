@@ -72,7 +72,7 @@ router.post('/edit', authMiddleware, animalValidators, async (req, res) => {
         const {id} = req.body
         delete req.body.id
         const animal = await Animal.findById(id)
-        if (!isOwner(animal, req)) {
+        if (!isOwner(animal, req) && !req.user.isAdmin) {
             return res.redirect('/animals')
         }
         Object.assign(animal, req.body)
