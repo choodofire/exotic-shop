@@ -17,6 +17,8 @@ import profileRoutes from './routes/profile.js'
 import varMiddleware from './middleware/variables.js';
 import userMiddleware from './middleware/user.js';
 import fileMiddleware from './middleware/file.js'
+import helmet from 'helmet'
+import compression from "compression"
 import keys from './keys/index.js'
 import hbsHelper from './utils/hbs-helper.js'
 import errorHandler from './middleware/error404.js'
@@ -59,6 +61,8 @@ app.use(csrf())
 app.use(varMiddleware)
 app.use(userMiddleware)
 app.use(flash())
+// app.use(helmet())
+app.use(compression())
 
 app.use('/', homeRoutes)
 app.use('/add', addRoutes)
