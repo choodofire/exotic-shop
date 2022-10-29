@@ -1,9 +1,12 @@
-const env = {
-    MONGODB_URI: 'mongodb+srv://vyacheslav:pgSLiNU2xaCeHIJ7@cluster0.qtqihfc.mongodb.net/shop',
-    SESSION_SECRET: 'some secret value',
-    MAIL_API_KEY: '6r4rfco7gj76ghm5mfjzrn1itbicdetd9jojotko',
-    EMAIL_FROM: 'ResSlavka1@gmail.com',
-    BASE_URL: 'http://localhost:3000',
-}
-
-export default env
+export default await new Promise(async (resolve, reject) => {
+        if (process.env.NODE_ENV === "production") {
+            const keys = await import('./keys.prod.js')
+            console.log("Выбраны ключи для продакшена")
+            resolve(keys.default)
+        } else {
+            const keys = await import('./keys.dev.js')
+            console.log("Выбраны ключи для разработки: ", keys.default)
+            resolve(keys.default)
+        }
+    }
+)
