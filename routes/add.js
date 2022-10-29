@@ -1,8 +1,13 @@
 import {Router} from 'express'
 import Animal from '../models/animal.js'
 import authMiddleware from "../middleware/auth.js";
+import checkAPIs from "express-validator"
+import validators from "../utils/validators.js";
 
 const router = Router()
+
+const {validationResult} = checkAPIs
+const animalValidators = validators.animalValidators
 
 router.get('/', authMiddleware, (req, res) => {
     res.status(200).render('add', {
@@ -11,7 +16,20 @@ router.get('/', authMiddleware, (req, res) => {
     })
 })
 
-router.post('/', authMiddleware,async (req, res) => {
+router.post('/', authMiddleware, animalValidators, async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(422).render('add', {
+            title: 'Добавить животное',
+            isAdd: true,
+            error: errors.array()[0].msg,
+            data: {
+                title: req.body.title,
+                price: req.body.price,
+                img: req.body.img,
+            }
+        })
+    }
     const animal = new Animal({
         title: req.body.title,
         price: req.body.price,

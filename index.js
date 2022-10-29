@@ -17,6 +17,7 @@ import varMiddleware from './middleware/variables.js';
 import userMiddleware from './middleware/user.js';
 import keys from './keys/index.js'
 import hbsHelper from './utils/hbs-helper.js'
+import errorHandler from './middleware/error404.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -61,6 +62,8 @@ app.use('/animals', animalsRoutes)
 app.use('/cart', cartRoutes)
 app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
+
+app.use(errorHandler)
 
 async function start() {
     try {

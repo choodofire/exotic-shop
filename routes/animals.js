@@ -1,8 +1,14 @@
 import {Router} from 'express'
 import Animal from '../models/animal.js'
 import authMiddleware from '../middleware/auth.js'
+import errorsLogFunc from '../utils/errors-helper.js'
+import User from "../models/user.js";
+import checkAPIs from "express-validator"
+import validators from "../utils/validators.js";
 
 const router = Router()
+const animalValidators = validators.animalValidators
+const {validationResult} = checkAPIs
 
 function isOwner(animal, req) {
     return animal.userId.toString() === req.user._id.toString()
@@ -53,11 +59,15 @@ router.get('/:id/edit', authMiddleware, async (req, res) => {
             animal
         })
     } catch (e) {
-        console.log(e)
+        console.log(e);
     }
 })
 
-router.post('/edit', authMiddleware, async (req, res) => {
+router.post('/edit', authMiddleware, animalValidators, async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(422).redirect(`/animals/${req.body.id}/edit?allow=true`)
+    }
     try {
         const {id} = req.body
         delete req.body.id
