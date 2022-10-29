@@ -13,8 +13,10 @@ import animalsRoutes from './routes/animals.js';
 import cartRoutes from './routes/cart.js';
 import ordersRoutes from './routes/orders.js';
 import authRoutes from './routes/auth.js';
+import profileRoutes from './routes/profile.js'
 import varMiddleware from './middleware/variables.js';
 import userMiddleware from './middleware/user.js';
+import fileMiddleware from './middleware/file.js'
 import keys from './keys/index.js'
 import hbsHelper from './utils/hbs-helper.js'
 import errorHandler from './middleware/error404.js'
@@ -44,6 +46,7 @@ app.set('view engine', 'hbs')
 app.set('views', 'views')
 
 app.use(express.static(path.join(__dirname, 'public')))
+app.use('/avatars', express.static(path.join(__dirname, 'avatars')))
 app.use(express.urlencoded({extended: true}))
 app.use(session({
     secret: keys.SESSION_SECRET,
@@ -51,6 +54,7 @@ app.use(session({
     saveUninitialized: false,
     store: store,
 }))
+app.use(fileMiddleware.single("avatar"))
 app.use(csrf())
 app.use(varMiddleware)
 app.use(userMiddleware)
@@ -62,6 +66,8 @@ app.use('/animals', animalsRoutes)
 app.use('/cart', cartRoutes)
 app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
+app.use('/profile', profileRoutes)
+
 
 app.use(errorHandler)
 
