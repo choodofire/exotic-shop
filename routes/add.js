@@ -31,6 +31,7 @@ router.post('/', authMiddleware, animalValidators, async (req, res) => {
                 title: req.body.title,
                 price: req.body.price,
                 img: req.body.img,
+                description: req.body.description,
             }
         })
     }
@@ -38,6 +39,7 @@ router.post('/', authMiddleware, animalValidators, async (req, res) => {
         title: req.body.title,
         price: req.body.price,
         img: req.body.img,
+        description: req.body.description,
         userId: req.user._id,
     })
 

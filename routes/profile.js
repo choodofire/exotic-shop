@@ -30,7 +30,11 @@ router.post('/', auth, async (req, res) => {
         const user = await User.findById(req.user._id)
 
         const toChange = {
-            name: req.body.name
+            name: req.body.name,
+            address: {
+                country: req.body?.country,
+                fullAddress: req.body?.fullAddress,
+            }
         }
 
         if (req.file) {

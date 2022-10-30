@@ -20,6 +20,14 @@ const userSchema = new Schema({
     avatarUrl: {
         type: String,
     },
+    address: {
+        country: {
+            type: String,
+        },
+        fullAddress: {
+            type: String,
+        },
+    },
     resetToken: String,
     resetTokenExp: Date,
     cart: {

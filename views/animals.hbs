@@ -1,41 +1,25 @@
 <h1>Animals</h1>
-    <div class="col s12">
+<div class="col">
         {{#if animals.length}}
             <div class="row">
                 {{#each animals}}
-                    <div class="col">
-                        <div class="card animal">
-                            <div class="card-image">
-                                <img src="{{img}}" alt="{{title}}">
+                    <div class="card-link">
+                        <a href="/animals/{{_id}}">
+                            <div class="col">
+                                <div class="card animal">
+                                    <div class="card-image">
+                                        <img src="{{img}}" alt="{{title}}">
+                                    </div>
+                                    <div class="card-content animal-description">
+                                        <span class="card-title">{{title}}</span>
+                                        <p class="price">{{price}}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-content animal-description">
-                                <span class="card-title">{{title}}</span>
-                                <p class="price">{{price}}</p>
-                            </div>
-                            <div class="card-action actions animal-footer">
-                                <a href="/animals/{{_id}}">Открыть</a>
-                                {{#if @root.isAuth}}
-<!--                                    {{#ifeq userId._id @root.userId}}-->
-<!--                                        <a href="/animals/{{_id}}/edit?allow=true">Редактировать</a>-->
-<!--                                    {{/ifeq}}-->
-                                    {{#if @root.isAdmin}}
-                                        <a href="/animals/{{_id}}/edit?allow=true">Редактировать</a>
-                                    {{/if}}
-                                    <form action="/cart/add" method="POST">
-                                        <input type="hidden" name="_csrf" value="{{@root.csrf}}">
-                                        <input type="hidden" name="id" value="{{_id}}">
-                                        <button type="submit" class="btn btn-primary">В корзину</button>
-                                    </form>
-                                {{/if}}
-                            </div>
-                        </div>
+                        </a>
                     </div>
-
                 {{/each}}
-
-
             </div>
-
         {{else}}
             <p>Животных нет</p>
         {{/if}}

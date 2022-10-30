@@ -34,8 +34,8 @@ router.get('/:id', async (req, res) => {
     try {
         const animal = await Animal.findById(req.params.id).lean()
         res.status(200).render('animal', {
-            layout: 'empty',
-            title: `Животное: ${animal.title}`,
+            // layout: 'empty',
+            title: animal.title,
             animal,
         })
     } catch (e) {
@@ -43,11 +43,11 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-
 router.get('/:id/edit', authMiddleware, async (req, res) => {
     if (!req.query.allow) {
         return res.redirect('/')
     }
+
     try {
         const animal = await Animal.findById(req.params.id).lean()
 
@@ -85,16 +85,15 @@ router.post('/edit', authMiddleware, animalValidators, async (req, res) => {
 
 router.post('/remove', authMiddleware, async (req, res) => {
     try {
-        await Animal.deleteOne({
-            _id: req.body.id,
-            userId: req.user._id,
-        })
+        if (req.user.isAdmin) {
+            await Animal.deleteOne({
+                _id: req.body.id,
+            })
+        }
         res.redirect('/animals')
     } catch (e) {
         console.log(e)
     }
-    
-
 })
 
 export default router

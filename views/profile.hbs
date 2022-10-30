@@ -16,31 +16,45 @@
         {{/if}}
 
         <div class="input-field">
-            <input id="email" name="email" type="text" class="validate" required value="{{user.email}}" disabled>
-            <label for="email"><h6>Email</h6></label>
+            <input id="email" name="email" type="text" class="validate" value="{{user.email}}" disabled>
+            <label for="email">Email</label>
             <span class="helper-text" data-error="Имя не может быть пустым"></span>
         </div>
 
         <form action="/profile" method="post" enctype="multipart/form-data">
-            <div class="input-field">
-                <input id="name" name="name" type="text" class="validate" required value="{{user.name}}">
-                <label for="name"><h6>Имя</h6></label>
-                <span class="helper-text" data-error="Имя не может быть пустым"></span>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="name" name="name" type="text" class="validate" required value="{{user.name}}">
+                    <label for="name">Имя</label>
+                    <span class="helper-text" data-error="Имя не может быть пустым"></span>
+                </div>
+
+                <div class="file-field input-field col s6">
+                    <div class="btn">
+                        <span>Аватар</span>
+                        <input type="file" name="avatar">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
             </div>
 
-            <div class="file-field input-field">
-                <div class="btn">
-                    <span>Аватар</span>
-                    <input type="file" name="avatar">
+
+            <h5>Адрес доставки</h5>
+                <div class="input-field">
+                    <input id="country" name="country" type="text" class="validate" value="{{user.address.country}}">
+                    <label for="country">Страна/Регион</label>
                 </div>
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text">
+                <div class="input-field">
+                    <input id="fullAddress" name="fullAddress" type="text" class="validate" value="{{user.address.fullAddress}}">
+                    <label for="fullAddress">Введите полный адрес</label>
                 </div>
-            </div>
 
             <input type="hidden" name="email" value="{{user.email}}">
             <input type="hidden" name="_csrf" value="{{csrf}}">
-            <button type="submit" class="btn">Изменить</button>
+            <button type="submit" class="btn">Сохранить</button>
         </form>
     </div>
 

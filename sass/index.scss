@@ -1,11 +1,15 @@
 $black: #131313;
 $white: #fff;
+$hover: #e8e8e8;
 
 body{
   //background-image: url('https://s1.gifyu.com/images/bo-bg-1.gif');
   height: 100vh;
   padding:0;
   margin:0;
+  a {
+    color: $black;
+  }
 }
 
 .nav-wrapper {
@@ -29,26 +33,47 @@ body{
     height: auto;
   }
   .price.big {
-    font-size: 4rem;
+    font-size: 2rem;
   }
 }
 
-.card.animal {
-  height: 650px;
-  width: 410px;
-  position: relative;
-  img {
-    max-height: 400px;
-    width: auto;
+.card-link {
+  .card.animal {
+    height: 600px;
+    max-width: 410px;
+    position: relative;
+
+    img {
+      max-height: 400px;
+      width: auto;
+    }
+    .animal-description {
+      height: 100%;
+      width: 100%;
+      margin: 0 auto auto 0;
+    }
   }
+}
+
+.card-link:hover {
   .animal-description {
-    margin-right: auto;
-    margin-bottom: auto;
+    background: $hover;
+    transition: 0.5s;
   }
-  .animal-footer {
-    position: absolute;
-    bottom: 0px;
+}
+
+.card-animal-description {
+  h3 {
+    text-align: center;
   }
+
+  .description {
+
+    .price.big {
+      font-size: 2rem;
+    }
+  }
+
 }
 
 .card-action {

@@ -9,7 +9,18 @@ const animalSchema = new Schema({
         type: Number,
         required: true,
     },
-    img: String,
+    img: {
+        type: String,
+        required: true,
+    },
+    description: {
+      type: String,
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        default: 1,
+    },
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
