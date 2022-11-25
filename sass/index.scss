@@ -1,23 +1,23 @@
-$black: #131313;
-$white: #fff;
-$hover: #e8e8e8;
+@import "colors.scss";
+@import "footer.scss";
+@import "navbar.scss";
+@import "home.scss";
+@import "shop.scss";
 
 body{
-  //background-image: url('https://s1.gifyu.com/images/bo-bg-1.gif');
   height: 100vh;
   padding:0;
   margin:0;
+  font-family: 'Montserrat';
   a {
     color: $black;
+    text-decoration: none;
   }
 }
 
-.nav-wrapper {
-  padding: 0 2rem;
-}
-
-.brand-logo {
-  cursor: default;
+.container {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .animal {
@@ -37,36 +37,18 @@ body{
   }
 }
 
-.card-link {
-  .card.animal {
-    height: 600px;
-    max-width: 410px;
-    position: relative;
-
-    img {
-      max-height: 400px;
-      width: auto;
-    }
-    .animal-description {
-      height: 100%;
-      width: 100%;
-      margin: 0 auto auto 0;
-    }
-  }
-}
-
-.card-link:hover {
-  .animal-description {
-    background: $hover;
-    transition: 0.5s;
-  }
+.shop {
+  padding: 0 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .card-animal-description {
   h3 {
     text-align: center;
   }
-
   .description {
 
     .price.big {

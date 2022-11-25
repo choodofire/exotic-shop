@@ -61,6 +61,7 @@ router.post('/login', async (req, res) => {
             res.redirect('/auth/login#login')
         }
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 })
@@ -86,6 +87,7 @@ router.post('/register', registerValidators, async (req, res) => {
         res.redirect('/auth/login#login')
         await uniSender.sendEmail(regEmail(email))
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 })
@@ -120,6 +122,7 @@ router.get('/password/:token', async (req, res) => {
         }
 
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 })
@@ -149,6 +152,7 @@ router.post('/reset',  (req, res) => {
 
         })
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 })
@@ -172,6 +176,7 @@ router.post('/password', async (req, res) => {
         }
 
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 })

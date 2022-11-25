@@ -1,25 +1,21 @@
-import {Schema, model} from 'mongoose'
+import Realm from "realm"
 
-const errorSchema = new Schema({
-    message: {
-        type: String,
-        required: true,
-    },
-    stackTrace: {
-        type: String,
-        required: true,
-    },
-    userEmail: {
-        type: String,
-    },
-    url: {
-        type: String,
-    },
-    date: {
-        type: Date,
-        default: Date.now
+const ErrorsSchema = {
+    name: "Error",
+    properties: {
+        message: "string",
+        stackTrace: "string",
+        userEmail: "string?",
+        userId: "objectId?",
+        url: "string",
+        timestamp: "date",
     }
+}
+
+const errorRealm = new Realm({
+    path: "errors.realm",
+    schema: [ErrorsSchema]
 })
 
-export default model('ErrorLog', errorSchema)
+export default errorRealm
 

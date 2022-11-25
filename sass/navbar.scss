@@ -1,0 +1,46 @@
+@import "colors.scss";
+
+.navbar-fixed {
+  height: 80px;
+  font-size: 14px;
+  font-weight: bold;
+  background: $black;
+  position: relative;
+  a {
+    color: $white;
+  }
+  .navbar-row {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    div {
+      ul {
+        padding: 0 50px 10px 50px;
+        margin-top: 28px;
+        margin-bottom: 0;
+        li {
+          display: inline-block;
+        }
+      }
+    }
+    .navbar-right {
+      li{
+        margin-left: 20px;
+      }
+    }
+    .navbar-left {
+      li {
+        margin-right: 20px;
+      }
+    }
+  }
+  .navbar-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    img {
+      width: 100%;
+    }
+  }
+}

@@ -1,11 +1,10 @@
 <h1>Animals</h1>
-<div class="col">
+<div class="shop">
         {{#if animals.length}}
-            <div class="row">
                 {{#each animals}}
                     <div class="card-link">
                         <a href="/animals/{{_id}}">
-                            <div class="col">
+                            <div>
                                 <div class="card animal">
                                     <div class="card-image">
                                         <img src="{{img}}" alt="{{title}}">
@@ -19,7 +18,6 @@
                         </a>
                     </div>
                 {{/each}}
-            </div>
         {{else}}
             <p>Животных нет</p>
         {{/if}}

@@ -1,0 +1,12 @@
+@import "colors.scss";
+
+.footer {
+  padding: 0 50px 25px 50px;
+  .footer-nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 12px;
+    justify-content: space-between;
+  }
+}

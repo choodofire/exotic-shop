@@ -1,7 +1,6 @@
 import {Router} from 'express'
 import Animal from '../models/animal.js'
 import authMiddleware from '../middleware/auth.js'
-import errorsLogFunc from '../utils/errors-helper.js'
 import User from "../models/user.js";
 import checkAPIs from "express-validator"
 import validators from "../utils/validators.js";
@@ -26,6 +25,7 @@ router.get('/', async (req, res) => {
             animals,
         })
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 })
@@ -38,7 +38,9 @@ router.get('/:id', async (req, res) => {
             title: animal.title,
             animal,
         })
+
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 })
@@ -52,13 +54,14 @@ router.get('/:id/edit', authMiddleware, async (req, res) => {
         const animal = await Animal.findById(req.params.id).lean()
 
         if (!isOwner(animal, req) && !req.user.isAdmin) {
-            return res.redirect('/animals')
+            return res.redirect('/shop')
         }
         res.status(200).render('animal-edit', {
             title: `Редактировать ${animal.title}`,
             animal,
         })
     } catch (e) {
+        res.status(500).send()
         console.log(e);
     }
 })
@@ -66,19 +69,20 @@ router.get('/:id/edit', authMiddleware, async (req, res) => {
 router.post('/edit', authMiddleware, animalValidators, async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-        return res.status(422).redirect(`/animals/${req.body.id}/edit?allow=true`)
+        return res.status(422).redirect(`/shop/${req.body.id}/edit?allow=true`)
     }
     try {
         const {id} = req.body
         delete req.body.id
         const animal = await Animal.findById(id)
         if (!isOwner(animal, req) && !req.user.isAdmin) {
-            return res.redirect('/animals')
+            return res.redirect('/shop')
         }
         Object.assign(animal, req.body)
         await animal.save()
-        res.redirect('/animals')
+        res.redirect('/shop')
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 })
@@ -90,8 +94,9 @@ router.post('/remove', authMiddleware, async (req, res) => {
                 _id: req.body.id,
             })
         }
-        res.redirect('/animals')
+        res.redirect('/shop')
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 })

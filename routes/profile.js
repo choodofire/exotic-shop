@@ -45,6 +45,7 @@ router.post('/', auth, async (req, res) => {
         await user.save()
         res.redirect('/profile')
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 })

@@ -1,62 +1,76 @@
-<div class="navbar-fixed">
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!">one</a></li>
-        <li><a href="#!">two</a></li>
-        <li class="divider"></li>
-        <li><a href="#!">three</a></li>
-    </ul>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo">Planet Exotic</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                {{#if isHome}}
-                    <li class="active"><a href="/">Главная</a></li>
-                {{else}}
-                    <li><a href="/">Главная</a></li>
-                {{/if}}
+<header>
+    <div class="navbar-fixed">
+        <div>
+            <nav>
+                <div class="navbar-row">
+                    <div class="navbar-left">
+                        <ul>
+                            {{#if isHome}}
+                                <li class="active"><a href="/">ГЛАВНАЯ</a></li>
+                            {{else}}
+                                <li><a href="/">ГЛАВНАЯ</a></li>
+                            {{/if}}
 
-                {{#if isAnimals}}
-                    <li class="active"><a href="/animals">Животные</a></li>
-                {{else}}
-                    <li><a href="/animals">Животные</a></li>
-                {{/if}}
+                            {{#if isAnimals}}
+                                <li class="active"><a href="/shop">МАГАЗИН</a></li>
+                            {{else}}
+                                <li><a href="/shop">МАГАЗИН</a></li>
+                            {{/if}}
 
-                {{#if @root.isAdmin}}
-                    {{#if isAdd}}
-                        <li class="active"><a href="/add">Добавить животное</a></li>
-                    {{else}}
-                        <li><a href="/add">Добавить животное</a></li>
-                    {{/if}}
-                {{/if}}
+                            {{#if isAnimals}}
+                                <li class="active"><a href="/info">ИНФО</a></li>
+                            {{else}}
+                                <li><a href="/info">ИНФО</a></li>
+                            {{/if}}
+                        </ul>
+                    </div>
+                    <div class="navbar-right">
+                        <ul>
+                            {{#if @root.isAdmin}}
+                                {{#if isAdd}}
+                                    <li class="active"><a href="/add">Добавить животное</a></li>
+                                {{else}}
+                                    <li><a href="/add">Добавить животное</a></li>
+                                {{/if}}
+                            {{/if}}
 
-                {{#if isAuth}}
+                            {{#if isAuth}}
 
-                    {{#if isProfile}}
-                        <li class="active"><a href="/profile">Профиль</a></li>
-                    {{else}}
-                        <li><a href="/profile">Профиль</a></li>
-                    {{/if}}
+                                {{#if isProfile}}
+                                    <li class="active"><a href="/profile">Профиль</a></li>
+                                {{else}}
+                                    <li><a href="/profile">Профиль</a></li>
+                                {{/if}}
 
-                    {{#if isCart}}
-                        <li class="active"><a href="/cart">Корзина</a></li>
-                    {{else}}
-                        <li><a href="/cart">Корзина</a></li>
-                    {{/if}}
+                                {{#if isCart}}
+                                    <li class="active"><a href="/cart">Корзина</a></li>
+                                {{else}}
+                                    <li><a href="/cart">Корзина</a></li>
+                                {{/if}}
 
-                    {{#if isOrders}}
-                        <li class="active"><a href="/orders">Заказы</a></li>
-                    {{else}}
-                        <li><a href="/orders">Заказы</a></li>
-                    {{/if}}
-                    <li><a href="/auth/logout">Выйти</a></li>
-                {{else}}
-                    {{#if isLogin}}
-                        <li class="active"><a href="/auth/login#login">Войти</a></li>
-                    {{else}}
-                        <li><a href="/auth/login#login">Войти</a></li>
-                    {{/if}}
-                {{/if}}
-            </ul>
+                                {{#if isOrders}}
+                                    <li class="active"><a href="/orders">Заказы</a></li>
+                                {{else}}
+                                    <li><a href="/orders">Заказы</a></li>
+                                {{/if}}
+                                <li><a href="/auth/logout">Выйти</a></li>
+                            {{else}}
+                                {{#if isLogin}}
+                                    <li class="active"><a href="/auth/login#login">ВОЙТИ</a></li>
+                                {{else}}
+                                    <li><a href="/auth/login#login">ВОЙТИ</a></li>
+                                {{/if}}
+                            {{/if}}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
-</div>
+        <div class="navbar-center">
+            <a href="/">
+                <img src="../../images/icons/index.png" alt="Logo">
+            </a>
+        </div>
+    </div>
+</header>
+

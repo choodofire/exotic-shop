@@ -14,6 +14,7 @@ import cartRoutes from './routes/cart.js';
 import ordersRoutes from './routes/orders.js';
 import authRoutes from './routes/auth.js';
 import profileRoutes from './routes/profile.js'
+import infoRoutes from './routes/info.js'
 import varMiddleware from './middleware/variables.js';
 import userMiddleware from './middleware/user.js';
 import fileMiddleware from './middleware/file.js'
@@ -75,11 +76,12 @@ app.use(compression())
 
 app.use('/', homeRoutes)
 app.use('/add', addRoutes)
-app.use('/animals', animalsRoutes)
+app.use('/shop', animalsRoutes)
 app.use('/cart', cartRoutes)
 app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
 app.use('/profile', profileRoutes)
+app.use('/info', infoRoutes)
 
 app.use(errorHandler)
 

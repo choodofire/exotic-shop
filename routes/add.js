@@ -45,8 +45,9 @@ router.post('/', authMiddleware, animalValidators, async (req, res) => {
 
     try {
         await animal.save()
-        res.redirect('/animals')
+        res.redirect('/shop')
     } catch (e) {
+        res.status(500).send()
         console.log(e)
     }
 
