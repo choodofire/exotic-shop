@@ -30,7 +30,7 @@ router.get('/login', async (req, res) => {
 
 router.get('/logout', async (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/auth/login#login')
+        res.redirect('/')
     })
 })
 

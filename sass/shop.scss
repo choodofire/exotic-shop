@@ -1,10 +1,11 @@
-@import "colors";
+@import "colors.scss";
+@import "shop-navbar.scss";
 
 .card-link {
-  height: 550px;
+  height: 500px;
   width: 400px;
   .card.animal {
-    height: 550px;
+    height: 500px;
     width: 400px;
     img {
       max-height: 350px;

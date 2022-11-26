@@ -15,6 +15,7 @@ import ordersRoutes from './routes/orders.js';
 import authRoutes from './routes/auth.js';
 import profileRoutes from './routes/profile.js'
 import infoRoutes from './routes/info.js'
+import productCategoryRoutes from "./routes/product-category.js";
 import varMiddleware from './middleware/variables.js';
 import userMiddleware from './middleware/user.js';
 import fileMiddleware from './middleware/file.js'
@@ -82,6 +83,7 @@ app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
 app.use('/profile', profileRoutes)
 app.use('/info', infoRoutes)
+app.use('/product-category', productCategoryRoutes)
 
 app.use(errorHandler)
 

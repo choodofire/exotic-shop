@@ -1,0 +1,51 @@
+<div class="shop-header">
+    <nav>
+        <div class="shop-header__nav">
+            <div class="shop-header__left link-underlined">
+                <ul>
+                    {{#if isAllProducts}}
+                        <li class="active"><a href="/shop">Все товары</a></li>
+                    {{else}}
+                        <li><a href="/shop">Все товары</a></li>
+                    {{/if}}
+
+                    {{#if isSnakes}}
+                        <li class="active"><a href="/product-category/snakes">Змеи</a></li>
+                    {{else}}
+                        <li><a href="/product-category/snakes">Змеи</a></li>
+                    {{/if}}
+
+                    {{#if isLizards}}
+                        <li class="active"><a href="/product-category/lizards">Ящерицы</a></li>
+                    {{else}}
+                        <li><a href="/product-category/lizards">Ящерицы</a></li>
+                    {{/if}}
+
+                    {{#if isEublefar}}
+                        <li class="active"><a href="/product-category/eublefars">Эублефары</a></li>
+                    {{else}}
+                        <li><a href="/product-category/eublefars">Эублефары</a></li>
+                    {{/if}}
+
+                    {{#if isSpider}}
+                        <li class="active"><a href="/product-category/spiders">Пауки и скорпионы</a></li>
+                    {{else}}
+                        <li><a href="/product-category/spiders">Пауки и скорпионы</a></li>
+                    {{/if}}
+
+                    {{#if isAmphibian}}
+                        <li class="active"><a href="/product-category/amphibians">Амфибии</a></li>
+                    {{else}}
+                        <li><a href="/product-category/amphibians">Амфибии</a></li>
+                    {{/if}}
+
+                    {{#if isTurtle}}
+                        <li class="active"><a href="/product-category/turtles">Черепахи</a></li>
+                    {{else}}
+                        <li><a href="/product-category/turtles">Черепахи</a></li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

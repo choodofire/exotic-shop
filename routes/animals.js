@@ -20,7 +20,8 @@ router.get('/', async (req, res) => {
             .populate('userId', 'email name')
         res.status(200).render('animals', {
             title: 'Животные',
-            isAnimals: true,
+            isShop: true,
+            isAllProducts: true,
             userId: req.user ? req.user._id.toString() : null,
             animals,
         })

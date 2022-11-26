@@ -1,9 +1,9 @@
 <header>
-    <div class="navbar-fixed">
+    <div class="header">
         <div>
             <nav>
-                <div class="navbar-row">
-                    <div class="navbar-left">
+                <div class="header__nav">
+                    <div class="header__left link-underlined">
                         <ul>
                             {{#if isHome}}
                                 <li class="active"><a href="/">ГЛАВНАЯ</a></li>
@@ -11,20 +11,20 @@
                                 <li><a href="/">ГЛАВНАЯ</a></li>
                             {{/if}}
 
-                            {{#if isAnimals}}
+                            {{#if isShop}}
                                 <li class="active"><a href="/shop">МАГАЗИН</a></li>
                             {{else}}
                                 <li><a href="/shop">МАГАЗИН</a></li>
                             {{/if}}
 
-                            {{#if isAnimals}}
+                            {{#if isInfo}}
                                 <li class="active"><a href="/info">ИНФО</a></li>
                             {{else}}
                                 <li><a href="/info">ИНФО</a></li>
                             {{/if}}
                         </ul>
                     </div>
-                    <div class="navbar-right">
+                    <div class="header__right link-underlined">
                         <ul>
                             {{#if @root.isAdmin}}
                                 {{#if isAdd}}
@@ -56,9 +56,9 @@
                                 <li><a href="/auth/logout">Выйти</a></li>
                             {{else}}
                                 {{#if isLogin}}
-                                    <li class="active"><a href="/auth/login#login">ВОЙТИ</a></li>
+                                    <li class="active popup-link"><a href="#loginPopup">ВОЙТИ</a></li>
                                 {{else}}
-                                    <li><a href="/auth/login#login">ВОЙТИ</a></li>
+                                    <li><a href="#loginPopup" class="popup-link">ВОЙТИ</a></li>
                                 {{/if}}
                             {{/if}}
                         </ul>
@@ -66,7 +66,7 @@
                 </div>
             </nav>
         </div>
-        <div class="navbar-center">
+        <div class="header__center">
             <a href="/">
                 <img src="../../images/icons/index.png" alt="Logo">
             </a>
