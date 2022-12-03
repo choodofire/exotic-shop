@@ -1,9 +1,15 @@
 {{> head }}
 <body>
     {{> navbar}}
-    <div class="container wrapper">
-        {{{ body }}}
-    </div>
+        {{#if isMain}}
+            <div class="container wrapper main">
+                {{{ body }}}
+            </div>
+        {{else}}
+            <div class="container wrapper">
+                {{{ body }}}
+            </div>
+        {{/if}}
     {{> footer}}
 {{#if isAuth}}
 

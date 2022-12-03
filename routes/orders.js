@@ -9,7 +9,6 @@ router.get('/', authMiddleware, async (req, res) => {
         const orders = await Order.find({'user.userId': req.user._id})
             .lean()
             .populate('user.userId')
-        console.log(orders)
         res.render('orders', {
             title: 'Заказы',
             isOrders: true,

@@ -59,3 +59,27 @@ if ($cart) {
         }
     })
 }
+
+const setActive = (el, active) => {
+    const formField = el.parentNode.parentNode
+    if (active) {
+        formField.classList.add('input-field--is-active')
+    } else {
+        formField.classList.remove('input-field--is-active')
+        el.value === '' ?
+            formField.classList.remove('input-field--is-filled') :
+            formField.classList.add('input-field--is-filled')
+    }
+}
+
+[].forEach.call(
+    document.querySelectorAll('.input-field__input, .input-field__textarea'),
+    (el) => {
+        el.onblur = () => {
+            setActive(el, false)
+        }
+        el.onfocus = () => {
+            setActive(el, true)
+        }
+    }
+)

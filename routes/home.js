@@ -6,6 +6,7 @@ router.get('/', (req, res) => {
     res.status(200).render('index', {
         title: 'Главная страница',
         isHome: true,
+        isMain: true,
     })
 })
 

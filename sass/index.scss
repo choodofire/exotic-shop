@@ -5,6 +5,8 @@
 @import "shop.scss";
 @import "popup.scss";
 @import "button.scss";
+@import "input.scss";
+@import "profile.scss";
 
 html, body{
   height: 100vh;
@@ -27,7 +29,12 @@ html, body{
 }
 
 .container {
-  margin: 0px auto;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+.main {
+  padding: 0;
 }
 
 .link-underlined {
@@ -76,7 +83,6 @@ html, body{
 }
 
 .shop {
-  padding: 0 50px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -117,18 +123,6 @@ html, body{
   margin-bottom: 1rem;
   background: rgba(255, 0, 0, .3);
   color: red;
-}
-
-.avatarBorder {
-  width: 300px;
-  height: 300px;
-  border: 2px solid $black;
-  border-radius: 50%;
-  overflow: hidden;
-  img {
-    max-width: 300px;
-    height: auto;
-  }
 }
 
 .popup-list {
